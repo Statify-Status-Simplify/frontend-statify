@@ -233,3 +233,5 @@ export function MainDashboard({ onLogout }: MainDashboardProps) {
     </div>
   )
 }
+
+export { MainDashboard }
