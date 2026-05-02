@@ -59,3 +59,5 @@ export function StatsCards() {
     </div>
   )
 }
+
+export { StatsCards }

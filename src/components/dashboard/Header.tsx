@@ -71,3 +71,5 @@ export function Header({ onLogout }: HeaderProps) {
     </header>
   )
 }
+
+export { Header }

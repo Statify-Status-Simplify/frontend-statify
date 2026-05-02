@@ -64,3 +64,5 @@ export function Sidebar({ activeItem, onItemClick }: SidebarProps) {
     </aside>
   )
 }
+
+export { Sidebar }

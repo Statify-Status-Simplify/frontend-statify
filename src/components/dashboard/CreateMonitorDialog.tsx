@@ -210,3 +210,5 @@ export function CreateMonitorDialog({
     </Dialog>
   )
 }
+
+export { CreateMonitorDialog }

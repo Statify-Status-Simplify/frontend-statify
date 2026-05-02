@@ -114,3 +114,5 @@ export function MonitorCard({
     </div>
   )
 }
+
+export { MonitorCard }

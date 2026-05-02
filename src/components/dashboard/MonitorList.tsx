@@ -105,3 +105,5 @@ export function MonitorList({ monitors }: MonitorListProps) {
     </div>
   )
 }
+
+export { MonitorList }
