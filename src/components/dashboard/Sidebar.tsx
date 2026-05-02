@@ -1,8 +1,10 @@
+import React from 'react'
 import {
   LayoutDashboard,
   Radio,
   Zap,
   Settings,
+  ChevronRight,
 } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
@@ -81,3 +83,5 @@ export function Sidebar({ activeItem, onItemClick }: SidebarProps) {
     </aside>
   )
 }
+
+export { Sidebar }

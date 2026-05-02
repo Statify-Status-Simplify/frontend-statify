@@ -1,5 +1,6 @@
+import React from 'react'
 import { Badge } from '../ui/Badge'
-import { Pause, Trash2, Edit } from 'lucide-react'
+import { MoreVertical, Pause, Trash2, Edit } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 interface Monitor {
@@ -18,9 +19,9 @@ interface MonitorListProps {
 
 export function MonitorList({ monitors }: MonitorListProps) {
   const statusConfig = {
-    up: { color: 'bg-emerald-500', label: 'Healthy' },
-    down: { color: 'bg-rose-500', label: 'Down' },
-    warning: { color: 'bg-amber-500', label: 'Degraded' },
+    up: { color: 'bg-success', label: 'UP' },
+    down: { color: 'bg-danger', label: 'DOWN' },
+    warning: { color: 'bg-warning', label: 'WARNING' },
   }
 
   return (
@@ -48,7 +49,7 @@ export function MonitorList({ monitors }: MonitorListProps) {
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-zinc-800/50">
+        <tbody>
           {monitors.map((monitor) => {
             const config = statusConfig[monitor.status]
             return (
@@ -104,3 +105,5 @@ export function MonitorList({ monitors }: MonitorListProps) {
     </div>
   )
 }
+
+export { MonitorList }

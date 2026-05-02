@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 import { StatsCards } from './StatsCards'
@@ -6,7 +6,7 @@ import { MonitorCard } from './MonitorCard'
 import { MonitorList } from './MonitorList'
 import { CreateMonitorDialog } from './CreateMonitorDialog'
 import { Button } from '../ui/Button'
-import { Tabs, TabsList, TabsTrigger } from '../ui/Tabs'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../ui/Tabs'
 import { Plus } from 'lucide-react'
 
 interface MainDashboardProps {
@@ -115,15 +115,12 @@ export function MainDashboard({ onLogout }: MainDashboardProps) {
   const [createMonitorOpen, setCreateMonitorOpen] = useState(false)
 
   return (
-    <div className="flex h-screen bg-zinc-950 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-hidden">
-      {/* Subtle Gradient Overlay */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none" />
-      
+    <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <Sidebar activeItem={activeNav} onItemClick={setActiveNav} />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden relative z-10">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
         <Header onLogout={onLogout} />
 
@@ -248,3 +245,5 @@ export function MainDashboard({ onLogout }: MainDashboardProps) {
     </div>
   )
 }
+
+export { MainDashboard }

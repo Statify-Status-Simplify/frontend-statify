@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Bell, Settings, LogOut, Search } from 'lucide-react'
 import { Input } from '../ui/Input'
 
@@ -32,7 +32,7 @@ export function Header({ onLogout }: HeaderProps) {
           </button>
 
           {/* User Avatar Dropdown */}
-          <div className="relative ml-2">
+          <div className="relative">
             <button
               onClick={() => setShowUserMenu(!showUserMenu)}
               className="flex items-center gap-4 rounded-2xl p-2 pl-4 border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-800 transition-all group"
@@ -72,3 +72,5 @@ export function Header({ onLogout }: HeaderProps) {
     </header>
   )
 }
+
+export { Header }

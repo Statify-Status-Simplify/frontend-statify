@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Badge } from '../ui/Badge'
 import { MoreVertical, Copy, Pause, Trash2 } from 'lucide-react'
 import { cn } from '../../lib/utils'
@@ -14,6 +14,7 @@ interface MonitorCardProps {
 }
 
 export function MonitorCard({
+  id,
   name,
   url,
   type,
@@ -24,9 +25,9 @@ export function MonitorCard({
   const [showMenu, setShowMenu] = useState(false)
 
   const statusConfig = {
-    up: { color: 'bg-emerald-500', label: 'Healthy', badge: 'success' as const },
-    down: { color: 'bg-rose-500', label: 'Down', badge: 'destructive' as const },
-    warning: { color: 'bg-amber-500', label: 'Degraded', badge: 'warning' as const },
+    up: { color: 'bg-success', label: 'UP', pulse: true },
+    down: { color: 'bg-danger', label: 'DOWN', pulse: false },
+    warning: { color: 'bg-warning', label: 'WARNING', pulse: false },
   }
 
   const config = statusConfig[status]
@@ -78,6 +79,9 @@ export function MonitorCard({
                         ? 'rgba(245, 158, 11, 0.6)'
                         : 'rgba(244, 63, 94, 0.9)', // Rose
                 }}
+                title={
+                  value === 1 ? 'Up' : value === 0.5 ? 'Partial' : 'Down'
+                }
               />
             ))}
           </div>
@@ -114,3 +118,5 @@ export function MonitorCard({
     </div>
   )
 }
+
+export { MonitorCard }
