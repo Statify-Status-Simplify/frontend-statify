@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Badge } from '../ui/Badge'
 import { MoreVertical, Copy, Pause, Trash2 } from 'lucide-react'
 import { cn } from '../../lib/utils'
@@ -14,6 +14,7 @@ interface MonitorCardProps {
 }
 
 export function MonitorCard({
+  id,
   name,
   url,
   type,
@@ -24,60 +25,59 @@ export function MonitorCard({
   const [showMenu, setShowMenu] = useState(false)
 
   const statusConfig = {
-    up: { color: 'bg-emerald-500', label: 'Healthy', badge: 'success' as const },
-    down: { color: 'bg-rose-500', label: 'Down', badge: 'destructive' as const },
-    warning: { color: 'bg-amber-500', label: 'Degraded', badge: 'warning' as const },
+    up: { color: 'bg-success', label: 'UP', pulse: true },
+    down: { color: 'bg-danger', label: 'DOWN', pulse: false },
+    warning: { color: 'bg-warning', label: 'WARNING', pulse: false },
   }
 
   const config = statusConfig[status]
 
   return (
-    <div className="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-6 hover:bg-zinc-900/50 hover:border-zinc-700 transition-all group">
+    <div className="rounded-lg border border-gray-700 bg-secondary p-6 hover:border-primary/50 transition-colors">
       <div className="flex items-start justify-between gap-4">
         {/* Left Section */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3">
-            <h3 className="font-semibold text-zinc-100 truncate group-hover:text-white transition-colors">{name}</h3>
-            <Badge variant={type === 'http' ? 'secondary' : 'default'}>
-              {type === 'http' ? 'HTTP' : 'IoT'}
+            <h3 className="font-semibold text-foreground truncate">{name}</h3>
+            <Badge variant={type === 'http' ? 'default' : 'secondary'}>
+              {type === 'http' ? 'HTTP Ping' : 'Heartbeat'}
             </Badge>
           </div>
 
-          <p className="mt-1 text-xs text-zinc-400 truncate font-mono">{url}</p>
+          <p className="mt-1 text-sm text-muted truncate">{url}</p>
 
           {/* Status Indicator */}
-          <div className="flex items-center gap-2 mt-5">
+          <div className="flex items-center gap-2 mt-4">
             <div
               className={cn(
-                'h-2 w-2 rounded-full',
+                'h-3 w-3 rounded-full',
                 config.color,
-                status === 'up' && 'animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.4)]',
-                status === 'down' && 'shadow-[0_0_12px_rgba(244,63,94,0.4)]',
-                status === 'warning' && 'shadow-[0_0_12px_rgba(245,158,11,0.4)]'
+                status === 'up' && 'animate-pulse'
               )}
             />
-            <span className="text-xs font-bold text-zinc-300 uppercase tracking-wide">
+            <span className="text-sm font-medium text-foreground">
               {config.label}
             </span>
-            <span className="text-[10px] font-bold text-zinc-400 ml-auto uppercase tracking-wider">
-              {uptime}% UPTIME
-            </span>
+            <span className="text-xs text-muted">({uptime}% uptime)</span>
           </div>
 
           {/* History Sparkline */}
-          <div className="mt-4 flex items-center gap-[1.5px]">
+          <div className="mt-4 flex items-center gap-1">
             {history.map((value, index) => (
               <div
                 key={index}
-                className="h-6 flex-1 rounded-[0.5px] transition-all"
+                className="h-8 w-1 rounded-sm"
                 style={{
                   backgroundColor:
                     value === 1
-                      ? 'rgba(16, 185, 129, 0.3)' // Softened Emerald
+                      ? '#10b981'
                       : value === 0.5
-                        ? 'rgba(245, 158, 11, 0.5)'
-                        : 'rgba(244, 63, 94, 0.8)', // Rose
+                        ? '#f59e0b'
+                        : '#ef4444',
                 }}
+                title={
+                  value === 1 ? 'Up' : value === 0.5 ? 'Partial' : 'Down'
+                }
               />
             ))}
           </div>
@@ -87,23 +87,23 @@ export function MonitorCard({
         <div className="relative">
           <button
             onClick={() => setShowMenu(!showMenu)}
-            className="rounded-xl p-2 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200 transition-all border border-transparent hover:border-zinc-700"
+            className="rounded-lg p-2 text-muted hover:bg-background hover:text-foreground transition-colors"
           >
-            <MoreVertical className="h-4 w-4" />
+            <MoreVertical className="h-5 w-5" />
           </button>
 
           {/* Dropdown Menu */}
           {showMenu && (
-            <div className="absolute right-0 top-full mt-2 w-44 rounded-xl border border-zinc-800 bg-zinc-900 p-1.5 shadow-2xl z-10 backdrop-blur-xl">
-              <button className="w-full px-3 py-2 text-left text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white flex items-center gap-2 transition-all rounded-lg">
-                <Copy className="h-4 w-4 text-zinc-400" />
+            <div className="absolute right-0 top-full mt-2 w-48 rounded-lg border border-gray-700 bg-secondary shadow-lg z-10">
+              <button className="w-full px-4 py-2 text-left text-sm text-foreground hover:bg-background flex items-center gap-2 transition-colors">
+                <Copy className="h-4 w-4" />
                 Edit
               </button>
-              <button className="w-full px-3 py-2 text-left text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white flex items-center gap-2 transition-all rounded-lg">
-                <Pause className="h-4 w-4 text-zinc-400" />
+              <button className="w-full px-4 py-2 text-left text-sm text-foreground hover:bg-background flex items-center gap-2 transition-colors">
+                <Pause className="h-4 w-4" />
                 Pause
               </button>
-              <button className="w-full px-3 py-2 text-left text-sm text-rose-400 hover:bg-rose-500/10 flex items-center gap-2 transition-all rounded-lg">
+              <button className="w-full px-4 py-2 text-left text-sm text-danger hover:bg-background flex items-center gap-2 transition-colors rounded-b-lg">
                 <Trash2 className="h-4 w-4" />
                 Delete
               </button>
@@ -114,3 +114,5 @@ export function MonitorCard({
     </div>
   )
 }
+
+export { MonitorCard }

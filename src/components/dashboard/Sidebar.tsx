@@ -1,8 +1,10 @@
+import React from 'react'
 import {
   LayoutDashboard,
   Radio,
   Zap,
   Settings,
+  ChevronRight,
 } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
@@ -20,17 +22,14 @@ const menuItems = [
 
 export function Sidebar({ activeItem, onItemClick }: SidebarProps) {
   return (
-    <aside className="w-64 border-r border-zinc-800 bg-zinc-950 p-6 flex flex-col h-screen">
+    <aside className="w-64 border-r border-gray-700 bg-secondary p-4 flex flex-col h-screen">
       {/* Logo */}
-      <div className="mb-10 px-2 flex items-center gap-3">
-        <div className="h-8 w-8 bg-indigo-500 rounded-lg flex items-center justify-center">
-          <Radio className="h-5 w-5 text-white" />
-        </div>
-        <h1 className="text-xl font-bold text-white tracking-tight">Statify</h1>
+      <div className="mb-8 px-2">
+        <h1 className="text-2xl font-bold text-primary">Statify</h1>
       </div>
 
       {/* Menu Items */}
-      <nav className="flex-1 space-y-1">
+      <nav className="flex-1 space-y-2">
         {menuItems.map((item) => {
           const Icon = item.icon
           const isActive = activeItem === item.id
@@ -40,36 +39,30 @@ export function Sidebar({ activeItem, onItemClick }: SidebarProps) {
               key={item.id}
               onClick={() => onItemClick(item.id)}
               className={cn(
-                'w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all group relative',
+                'w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all',
                 isActive
-                  ? 'bg-zinc-800/50 text-white shadow-sm'
-                  : 'text-zinc-400 hover:bg-zinc-800/30 hover:text-zinc-300'
+                  ? 'bg-primary text-black'
+                  : 'text-muted hover:bg-background hover:text-foreground'
               )}
             >
-              <Icon className={cn(
-                'h-5 w-5 transition-colors',
-                isActive ? 'text-indigo-500' : 'text-zinc-400 group-hover:text-zinc-300'
-              )} />
-              <span>{item.label}</span>
-              {isActive && (
-                <div className="absolute left-0 w-1 h-5 bg-indigo-500 rounded-full" />
-              )}
+              <div className="flex items-center gap-3">
+                <Icon className="h-5 w-5" />
+                <span>{item.label}</span>
+              </div>
+              {isActive && <ChevronRight className="h-4 w-4" />}
             </button>
           )
         })}
       </nav>
 
       {/* Footer */}
-      <div className="border-t border-zinc-800 pt-6">
-        <div className="flex items-center gap-3 px-2">
-          <div className="h-8 w-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-[10px] font-bold text-zinc-400">
-            v1.0
-          </div>
-          <p className="text-xs font-medium text-zinc-400">
-            Enterprise Plan
-          </p>
-        </div>
+      <div className="border-t border-gray-700 pt-4">
+        <p className="text-xs text-muted text-center">
+          Statify v1.0
+        </p>
       </div>
     </aside>
   )
 }
+
+export { Sidebar }
