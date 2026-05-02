@@ -61,7 +61,7 @@ export function OTPInput({
           onKeyDown={(e) => handleKeyDown(index, e)}
           onPaste={handlePaste}
           className={cn(
-            'h-12 w-12 rounded-md border border-gray-700 bg-secondary text-center text-xl font-semibold text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background',
+            'h-12 w-12 rounded-xl border border-zinc-800 bg-zinc-900 text-center text-xl font-semibold text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:ring-offset-0 transition-all',
             className
           )}
         />
@@ -69,5 +69,3 @@ export function OTPInput({
     </div>
   )
 }
-
-export { OTPInput }

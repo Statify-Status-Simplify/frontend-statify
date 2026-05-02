@@ -27,11 +27,9 @@ export function Dialog({ open: controlledOpen, onOpenChange, children }: DialogP
   return (
     <DialogContext.Provider value={{ open, setOpen }}>
       {children}
-    </div>
+    </DialogContext.Provider>
   )
 }
-
-export { Dialog, DialogOverlay, DialogContent }
 
 interface DialogTriggerProps {
   asChild?: boolean
@@ -70,7 +68,7 @@ export function DialogContent({ children, className }: DialogContentProps) {
         className="fixed inset-0 z-40 bg-black/80"
         onClick={() => context.setOpen(false)}
       />
-      <div className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] border border-gray-700 bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg">
+      <div className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] border border-zinc-800 bg-zinc-950 p-8 shadow-2xl duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-2xl">
         <button
           onClick={() => context.setOpen(false)}
           className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none"

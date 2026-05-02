@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 import { StatsCards } from './StatsCards'
@@ -6,7 +6,7 @@ import { MonitorCard } from './MonitorCard'
 import { MonitorList } from './MonitorList'
 import { CreateMonitorDialog } from './CreateMonitorDialog'
 import { Button } from '../ui/Button'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../ui/Tabs'
+import { Tabs, TabsList, TabsTrigger } from '../ui/Tabs'
 import { Plus } from 'lucide-react'
 
 interface MainDashboardProps {
@@ -115,36 +115,46 @@ export function MainDashboard({ onLogout }: MainDashboardProps) {
   const [createMonitorOpen, setCreateMonitorOpen] = useState(false)
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex h-screen bg-zinc-950 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-hidden">
+      {/* Subtle Gradient Overlay */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none" />
+      
       {/* Sidebar */}
       <Sidebar activeItem={activeNav} onItemClick={setActiveNav} />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden relative z-10">
         {/* Header */}
         <Header onLogout={onLogout} />
 
         {/* Page Content */}
         <main className="flex-1 overflow-auto">
-          <div className="p-6">
+          <div className="max-w-(--container-2xl) mx-auto px-8 pt-10 pb-20">
             {activeNav === 'dashboard' && (
-              <div>
+              <div className="space-y-16">
                 {/* Page Header */}
-                <div className="mb-8 flex items-center justify-between">
-                  <div>
-                    <h1 className="text-3xl font-bold text-foreground">
-                      Dashboard
-                    </h1>
-                    <p className="mt-1 text-sm text-muted">
-                      Monitor your digital assets in real-time
+                <div className="flex items-end justify-between">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-3">
+                      <h1 className="text-4xl font-extrabold tracking-tight text-white">
+                        Dashboard
+                      </h1>
+                      <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                        <div className="h-1 w-1 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-[10px] font-bold text-emerald-500 tracking-widest">LIVE</span>
+                      </div>
+                    </div>
+                    <p className="text-zinc-400 font-medium">
+                      Real-time status of your global digital infrastructure.
                     </p>
                   </div>
                   <Button
                     onClick={() => setCreateMonitorOpen(true)}
-                    className="flex items-center gap-2"
+                    size="lg"
+                    className="gap-2 shadow-lg shadow-indigo-500/10"
                   >
                     <Plus className="h-4 w-4" />
-                    Create Monitor
+                    New Monitor
                   </Button>
                 </div>
 
@@ -152,27 +162,32 @@ export function MainDashboard({ onLogout }: MainDashboardProps) {
                 <StatsCards />
 
                 {/* Monitors Section */}
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold text-foreground">
-                      Monitors
-                    </h2>
+                    <div className="flex items-center gap-3">
+                      <h2 className="text-xl font-bold text-white tracking-tight">
+                        Active Monitors
+                      </h2>
+                      <div className="px-2 py-0.5 rounded-md bg-zinc-900 border border-zinc-800 text-[10px] font-bold text-zinc-400 uppercase">
+                        {sampleMonitors.length} Total
+                      </div>
+                    </div>
                     <Tabs
                       value={viewMode}
                       onValueChange={(value) =>
                         setViewMode(value as 'grid' | 'list')
                       }
                     >
-                      <TabsList>
-                        <TabsTrigger value="grid">Grid</TabsTrigger>
-                        <TabsTrigger value="list">List</TabsTrigger>
+                      <TabsList className="bg-zinc-900 border border-zinc-800 p-1">
+                        <TabsTrigger value="grid" className="rounded-md">Grid</TabsTrigger>
+                        <TabsTrigger value="list" className="rounded-md">List</TabsTrigger>
                       </TabsList>
                     </Tabs>
                   </div>
 
                   {/* Grid View */}
                   {viewMode === 'grid' && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {sampleMonitors.map((monitor) => (
                         <MonitorCard key={monitor.id} {...monitor} />
                       ))}
@@ -233,5 +248,3 @@ export function MainDashboard({ onLogout }: MainDashboardProps) {
     </div>
   )
 }
-
-export { MainDashboard }

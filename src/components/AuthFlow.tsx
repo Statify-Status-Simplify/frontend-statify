@@ -56,18 +56,21 @@ export function AuthFlow({ onAuthenticated }: AuthFlowProps) {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="w-full max-w-md space-y-8">
+    <div className="flex min-h-screen items-center justify-center bg-zinc-950 px-4 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="w-full max-w-md space-y-8 relative z-10">
         {/* Logo/Header */}
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-foreground">Statify</h1>
-          <p className="mt-2 text-sm text-muted">
+          <h1 className="text-4xl font-extrabold tracking-tight text-white mb-2">Statify</h1>
+          <p className="text-zinc-400 font-medium">
             Unified Digital Asset Guardian
           </p>
         </div>
 
         {/* Auth Card */}
-        <div className="rounded-lg border border-gray-700 bg-secondary p-8 shadow-lg">
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 shadow-2xl backdrop-blur-xl">
           {step === 'form' ? (
             <>
               <Tabs
@@ -82,8 +85,8 @@ export function AuthFlow({ onAuthenticated }: AuthFlowProps) {
 
                 {/* Login Tab */}
                 <TabsContent value="login">
-                  <form onSubmit={handleSignIn} className="space-y-4 pt-6">
-                    <div className="space-y-2">
+                  <form onSubmit={handleSignIn} className="space-y-6 pt-6">
+                    <div className="space-y-2.5">
                       <label className="text-sm font-medium text-foreground">
                         Email
                       </label>
@@ -92,11 +95,12 @@ export function AuthFlow({ onAuthenticated }: AuthFlowProps) {
                         placeholder="you@example.com"
                         value={loginEmail}
                         onChange={(e) => setLoginEmail(e.target.value)}
+                        className="h-11 text-base"
                         required
                       />
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2.5">
                       <div className="flex items-center justify-between">
                         <label className="text-sm font-medium text-foreground">
                           Password
@@ -104,7 +108,7 @@ export function AuthFlow({ onAuthenticated }: AuthFlowProps) {
                         <a
                           href="#"
                           onClick={(e) => e.preventDefault()}
-                          className="text-xs text-primary hover:underline"
+                          className="text-xs text-indigo-400 hover:text-indigo-300 hover:underline transition-colors"
                         >
                           Forgot password?
                         </a>
@@ -114,18 +118,19 @@ export function AuthFlow({ onAuthenticated }: AuthFlowProps) {
                         placeholder="••••••••"
                         value={loginPassword}
                         onChange={(e) => setLoginPassword(e.target.value)}
+                        className="h-11 text-base"
                         required
                       />
                     </div>
 
                     <Button
                       type="submit"
-                      className="w-full"
+                      className="w-full h-11 text-base font-semibold shadow-lg shadow-indigo-500/20 mt-2"
                       disabled={loading}
                     >
                       {loading ? (
                         <>
-                          <Loader className="mr-2 h-4 w-4 animate-spin" />
+                          <Loader className="mr-2 h-5 w-5 animate-spin" />
                           Signing in...
                         </>
                       ) : (
@@ -137,8 +142,8 @@ export function AuthFlow({ onAuthenticated }: AuthFlowProps) {
 
                 {/* Sign Up Tab */}
                 <TabsContent value="signup">
-                  <form onSubmit={handleCreateAccount} className="space-y-4 pt-6">
-                    <div className="space-y-2">
+                  <form onSubmit={handleCreateAccount} className="space-y-6 pt-6">
+                    <div className="space-y-2.5">
                       <label className="text-sm font-medium text-foreground">
                         Full Name
                       </label>
@@ -147,11 +152,12 @@ export function AuthFlow({ onAuthenticated }: AuthFlowProps) {
                         placeholder="John Doe"
                         value={signupName}
                         onChange={(e) => setSignupName(e.target.value)}
+                        className="h-11 text-base"
                         required
                       />
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2.5">
                       <label className="text-sm font-medium text-foreground">
                         Email
                       </label>
@@ -160,11 +166,12 @@ export function AuthFlow({ onAuthenticated }: AuthFlowProps) {
                         placeholder="you@example.com"
                         value={signupEmail}
                         onChange={(e) => setSignupEmail(e.target.value)}
+                        className="h-11 text-base"
                         required
                       />
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2.5">
                       <label className="text-sm font-medium text-foreground">
                         Password
                       </label>
@@ -173,18 +180,19 @@ export function AuthFlow({ onAuthenticated }: AuthFlowProps) {
                         placeholder="••••••••"
                         value={signupPassword}
                         onChange={(e) => setSignupPassword(e.target.value)}
+                        className="h-11 text-base"
                         required
                       />
                     </div>
 
                     <Button
                       type="submit"
-                      className="w-full"
+                      className="w-full h-11 text-base font-semibold shadow-lg shadow-indigo-500/20 mt-2"
                       disabled={loading}
                     >
                       {loading ? (
                         <>
-                          <Loader className="mr-2 h-4 w-4 animate-spin" />
+                          <Loader className="mr-2 h-5 w-5 animate-spin" />
                           Creating account...
                         </>
                       ) : (
@@ -249,10 +257,10 @@ export function AuthFlow({ onAuthenticated }: AuthFlowProps) {
         </div>
 
         {/* Dev Helper */}
-        <div className="text-center pt-4">
+        <div className="text-center pt-8">
           <button
             onClick={onAuthenticated}
-            className="text-xs text-muted hover:text-primary"
+            className="text-xs font-bold text-zinc-500 hover:text-indigo-400 transition-colors py-2 px-4 rounded-lg border border-transparent hover:border-zinc-800 hover:bg-zinc-900/50"
           >
             [Dev: Bypass to Dashboard]
           </button>

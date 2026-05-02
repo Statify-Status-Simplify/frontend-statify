@@ -1,6 +1,5 @@
-import React from 'react'
 import { Badge } from '../ui/Badge'
-import { MoreVertical, Pause, Trash2, Edit } from 'lucide-react'
+import { Pause, Trash2, Edit } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 interface Monitor {
@@ -19,80 +18,80 @@ interface MonitorListProps {
 
 export function MonitorList({ monitors }: MonitorListProps) {
   const statusConfig = {
-    up: { color: 'bg-success', label: 'UP' },
-    down: { color: 'bg-danger', label: 'DOWN' },
-    warning: { color: 'bg-warning', label: 'WARNING' },
+    up: { color: 'bg-emerald-500', label: 'Healthy' },
+    down: { color: 'bg-rose-500', label: 'Down' },
+    warning: { color: 'bg-amber-500', label: 'Degraded' },
   }
 
   return (
-    <div className="rounded-lg border border-gray-700 overflow-hidden">
+    <div className="rounded-2xl border border-zinc-800 bg-zinc-900/20 overflow-hidden">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-700 bg-secondary/50">
-            <th className="px-6 py-4 text-left font-semibold text-foreground">
+          <tr className="border-b border-zinc-800 bg-zinc-900/50">
+            <th className="px-6 py-4 text-left font-bold text-zinc-400 uppercase tracking-widest text-[10px]">
               Monitor
             </th>
-            <th className="px-6 py-4 text-left font-semibold text-foreground">
+            <th className="px-6 py-4 text-left font-bold text-zinc-400 uppercase tracking-widest text-[10px]">
               Type
             </th>
-            <th className="px-6 py-4 text-left font-semibold text-foreground">
+            <th className="px-6 py-4 text-left font-bold text-zinc-400 uppercase tracking-widest text-[10px]">
               Status
             </th>
-            <th className="px-6 py-4 text-left font-semibold text-foreground">
+            <th className="px-6 py-4 text-left font-bold text-zinc-400 uppercase tracking-widest text-[10px]">
               Uptime
             </th>
-            <th className="px-6 py-4 text-left font-semibold text-foreground">
+            <th className="px-6 py-4 text-left font-bold text-zinc-400 uppercase tracking-widest text-[10px]">
               Last Check
             </th>
-            <th className="px-6 py-4 text-right font-semibold text-foreground">
+            <th className="px-6 py-4 text-right font-bold text-zinc-400 uppercase tracking-widest text-[10px]">
               Actions
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="divide-y divide-zinc-800/50">
           {monitors.map((monitor) => {
             const config = statusConfig[monitor.status]
             return (
               <tr
                 key={monitor.id}
-                className="border-b border-gray-700 hover:bg-secondary/50 transition-colors"
+                className="group hover:bg-indigo-500/5 transition-all"
               >
-                <td className="px-6 py-4">
+                <td className="px-6 py-5">
                   <div>
-                    <p className="font-medium text-foreground">{monitor.name}</p>
-                    <p className="text-xs text-muted">{monitor.url}</p>
+                    <p className="font-semibold text-zinc-200 group-hover:text-white transition-colors">{monitor.name}</p>
+                    <p className="text-xs text-zinc-400 font-mono mt-0.5">{monitor.url}</p>
                   </div>
                 </td>
-                <td className="px-6 py-4">
-                  <Badge variant={monitor.type === 'http' ? 'default' : 'secondary'}>
-                    {monitor.type === 'http' ? 'HTTP Ping' : 'Heartbeat'}
+                <td className="px-6 py-5">
+                  <Badge variant={monitor.type === 'http' ? 'secondary' : 'default'}>
+                    {monitor.type === 'http' ? 'HTTP' : 'IoT'}
                   </Badge>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-5">
                   <div className="flex items-center gap-2">
-                    <div className={cn('h-3 w-3 rounded-full', config.color)} />
-                    <span className="font-medium text-foreground">
+                    <div className={cn('h-2 w-2 rounded-full', config.color)} />
+                    <span className="font-bold text-zinc-300 uppercase text-[11px] tracking-wide">
                       {config.label}
                     </span>
                   </div>
                 </td>
-                <td className="px-6 py-4">
-                  <span className="text-foreground font-medium">
+                <td className="px-6 py-5">
+                  <span className="text-zinc-200 font-medium">
                     {monitor.uptime}%
                   </span>
                 </td>
-                <td className="px-6 py-4">
-                  <span className="text-muted">{monitor.lastCheck}</span>
+                <td className="px-6 py-5">
+                  <span className="text-zinc-400 text-xs">{monitor.lastCheck}</span>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-5 text-right">
                   <div className="flex justify-end gap-1">
-                    <button className="rounded-lg p-2 text-muted hover:bg-background hover:text-foreground transition-colors">
+                    <button className="rounded-xl p-2 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200 transition-all border border-transparent hover:border-zinc-700">
                       <Edit className="h-4 w-4" />
                     </button>
-                    <button className="rounded-lg p-2 text-muted hover:bg-background hover:text-foreground transition-colors">
+                    <button className="rounded-xl p-2 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200 transition-all border border-transparent hover:border-zinc-700">
                       <Pause className="h-4 w-4" />
                     </button>
-                    <button className="rounded-lg p-2 text-muted hover:bg-background hover:text-danger transition-colors">
+                    <button className="rounded-xl p-2 text-zinc-400 hover:bg-rose-500/10 hover:text-rose-400 transition-all border border-transparent hover:border-rose-500/20">
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
@@ -105,5 +104,3 @@ export function MonitorList({ monitors }: MonitorListProps) {
     </div>
   )
 }
-
-export { MonitorList }
