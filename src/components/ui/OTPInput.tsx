@@ -69,3 +69,5 @@ export function OTPInput({
     </div>
   )
 }
+
+export { OTPInput }
