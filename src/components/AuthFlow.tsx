@@ -261,5 +261,3 @@ export function AuthFlow({ onAuthenticated }: AuthFlowProps) {
     </div>
   )
 }
-
-export { AuthFlow }
