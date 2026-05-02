@@ -13,6 +13,18 @@ export default {
         secondary: '#1a1f2e',
         accent: '#00a8cc',
         muted: '#64748b',
+        success: '#10b981',
+        danger: '#ef4444',
+        warning: '#f59e0b',
+      },
+      keyframes: {
+        pulse: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' },
+        },
+      },
+      animation: {
+        pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
