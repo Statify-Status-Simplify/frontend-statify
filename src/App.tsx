@@ -118,69 +118,98 @@ function AuthView({ onLogin }: { onLogin: () => void }) {
   const [name, setName] = useState('')
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-6 py-16 relative overflow-hidden">
+      
+      {/* subtle background glow */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-[500px] h-[500px] bg-indigo-600/10 blur-3xl rounded-full" />
+      </div>
+
+      <div className="w-full max-w-md relative z-10">
+        
         {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-indigo-600 rounded-lg mb-4">
-            <div className="text-white font-bold text-lg">S</div>
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-2xl mb-6 shadow-xl shadow-indigo-600/30">
+            <span className="text-white font-bold text-xl">S</span>
           </div>
-          <h1 className="text-2xl font-bold text-white">Statify</h1>
-          <p className="text-zinc-400 text-sm mt-2">Digital Asset & IoT Monitoring</p>
+
+          <h1 className="text-3xl font-semibold text-white tracking-tight">
+            Statify
+          </h1>
+
+          <p className="text-zinc-400 text-sm mt-2">
+            Digital Asset & IoT Monitoring
+          </p>
         </div>
 
         {/* Card */}
-        <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-8 mb-6">
-          <h2 className="text-xl font-semibold text-white mb-6">{isSignup ? 'Create Account' : 'Welcome Back'}</h2>
+        <div className="bg-zinc-900/70 backdrop-blur-xl border border-zinc-800 rounded-2xl p-8 shadow-2xl shadow-black/50">
+          
+          <h2 className="text-2xl font-semibold text-white mb-6">
+            {isSignup ? 'Create Account' : 'Welcome Back'}
+          </h2>
 
-          <div className="space-y-4 mb-6">
+          <div className="space-y-6">
+            
             {isSignup && (
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-2">Full Name</label>
+                <label className="block text-sm text-zinc-400 mb-2">
+                  Full Name
+                </label>
                 <Input
                   type="text"
                   placeholder="John Doe"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-zinc-800 border-zinc-700 text-white placeholder-zinc-500"
+                  className="w-full h-12 px-4 rounded-xl bg-zinc-800/80 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
                 />
               </div>
             )}
+
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">Email</label>
+              <label className="block text-sm text-zinc-400 mb-2">
+                Email
+              </label>
               <Input
                 type="email"
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-zinc-800 border-zinc-700 text-white placeholder-zinc-500"
+                className="w-full h-12 px-4 rounded-xl bg-zinc-800/80 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
               />
             </div>
+
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">Password</label>
+              <label className="block text-sm text-zinc-400 mb-2">
+                Password
+              </label>
               <Input
                 type="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-zinc-800 border-zinc-700 text-white placeholder-zinc-500"
+                className="w-full h-12 px-4 rounded-xl bg-zinc-800/80 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
               />
             </div>
           </div>
 
+          {/* Button */}
           <Button
             onClick={onLogin}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 mb-4"
+            className="w-full h-12 mt-8 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 transition-all duration-200 text-white font-medium shadow-lg shadow-indigo-600/20"
           >
             {isSignup ? 'Create Account' : 'Sign In'}
           </Button>
 
-          <div className="text-center">
+          {/* Toggle */}
+          <div className="text-center mt-6">
             <p className="text-sm text-zinc-400">
-              {isSignup ? 'Already have an account?' : "Don't have an account?"}{' '}
+              {isSignup
+                ? 'Already have an account?'
+                : "Don't have an account?"}{' '}
               <button
                 onClick={() => setIsSignup(!isSignup)}
-                className="text-indigo-400 hover:text-indigo-300 font-medium"
+                className="text-indigo-400 hover:text-indigo-300 font-medium transition"
               >
                 {isSignup ? 'Sign In' : 'Sign Up'}
               </button>
@@ -189,10 +218,10 @@ function AuthView({ onLogin }: { onLogin: () => void }) {
         </div>
 
         {/* Dev Bypass */}
-        <div className="text-center">
+        <div className="text-center mt-6">
           <button
             onClick={onLogin}
-            className="text-xs text-zinc-500 hover:text-zinc-400 underline"
+            className="text-xs text-zinc-500 hover:text-zinc-400 underline transition"
           >
             [Dev: Bypass to Dashboard]
           </button>
