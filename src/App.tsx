@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Activity, Menu, X, LogOut, Plus, AlertCircle, CheckCircle2, Clock } from 'lucide-react'
+import { Activity, LogIn, Menu, X, LogOut, Plus, AlertCircle, CheckCircle2, Clock } from 'lucide-react'
 import { Button } from './components/ui/Button'
 import { Input } from './components/ui/Input'
 
@@ -120,7 +120,7 @@ function AuthView({ onLogin }: { onLogin: () => void }) {
   return (
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl shadow-indigo-950/15 overflow-hidden">
-        <div className="p-8 sm:p-10">
+        <div className="px-8 py-10 w-full">
           <div className="flex flex-col items-center gap-3 text-center">
             <div className="flex items-center gap-2 text-indigo-500">
               <Activity className="h-5 w-5" />
@@ -132,57 +132,71 @@ function AuthView({ onLogin }: { onLogin: () => void }) {
             </p>
           </div>
 
-          <div className="mt-10 space-y-6">
+          <div className="mt-10 flex flex-col gap-4">
             {isSignup && (
-              <div>
-                <label className="block mb-2 text-sm font-medium text-zinc-300">Full name</label>
+              <div className="flex flex-col gap-1.5">
+                <label className="block text-sm font-medium text-zinc-300">Full name</label>
                 <Input
                   type="text"
                   placeholder="Alex Morgan"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="h-10 rounded-md border-zinc-800 bg-zinc-950/50"
+                  className="w-full h-10 rounded-md border border-zinc-800 bg-zinc-950/50"
                 />
               </div>
             )}
 
-            <div>
-              <label className="block mb-2 text-sm font-medium text-zinc-300">Email address</label>
+            <div className="flex flex-col gap-1.5">
+              <label className="block text-sm font-medium text-zinc-300">Email address</label>
               <Input
                 type="email"
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-10 rounded-md border-zinc-800 bg-zinc-950/50"
+                className="w-full h-10 rounded-md border border-zinc-800 bg-zinc-950/50"
               />
             </div>
 
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-sm font-medium text-zinc-300">Password</label>
-                <button type="button" className="text-sm text-indigo-400 hover:text-indigo-300 font-medium">
-                  Forgot password?
-                </button>
-              </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="block text-sm font-medium text-zinc-300">Password</label>
               <Input
                 type="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="h-10 rounded-md border-zinc-800 bg-zinc-950/50"
+                className="w-full h-10 rounded-md border border-zinc-800 bg-zinc-950/50"
               />
+              <div className="flex justify-end mt-2">
+                <a href="#" className="text-sm font-medium text-indigo-400 hover:text-indigo-300">
+                  Forgot password?
+                </a>
+              </div>
             </div>
 
             <Button
               onClick={onLogin}
               variant="default"
-              className="w-full h-10 rounded-md bg-indigo-600 hover:bg-indigo-500 font-medium mt-4"
+              className="w-full h-10 rounded-md bg-indigo-600 hover:bg-indigo-500 font-medium mt-2"
             >
               {isSignup ? 'Create account' : 'Sign in'}
             </Button>
           </div>
 
-          <div className="mt-6 flex items-center justify-center gap-2 text-sm text-zinc-400">
+          <div className="relative flex items-center my-6">
+            <div className="flex-grow border-t border-zinc-800" />
+            <span className="shrink-0 px-3 text-sm text-zinc-500">Or continue with</span>
+            <div className="flex-grow border-t border-zinc-800" />
+          </div>
+
+          <Button
+            variant="outline"
+            className="w-full flex items-center justify-center gap-2 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:border-zinc-600"
+          >
+            <LogIn className="h-4 w-4" />
+            Sign in with GitHub
+          </Button>
+
+          <div className="mt-8 flex items-center justify-center gap-2 text-sm text-zinc-400">
             <p>{isSignup ? 'Already have an account?' : "Don't have an account?"}</p>
             <button
               onClick={() => setIsSignup(!isSignup)}
@@ -192,7 +206,7 @@ function AuthView({ onLogin }: { onLogin: () => void }) {
             </button>
           </div>
 
-          <div className="mt-6 border-t border-zinc-800 pt-4 text-center text-sm">
+          <div className="mt-8 text-center text-sm">
             <button onClick={onLogin} className="text-indigo-400 hover:text-indigo-300 font-medium underline">
               [Dev: Bypass to Dashboard]
             </button>
