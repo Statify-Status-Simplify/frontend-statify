@@ -1,5 +1,5 @@
-import React from 'react'
 import { Activity, TrendingUp, AlertCircle, Zap } from 'lucide-react'
+import { cn } from '../../lib/utils'
 
 interface StatCard {
   title: string
@@ -57,5 +57,3 @@ export function StatsCards() {
     </div>
   )
 }
-
-export { StatsCards }

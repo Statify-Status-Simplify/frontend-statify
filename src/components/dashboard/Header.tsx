@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Bell, Settings, LogOut, Search } from 'lucide-react'
 import { Input } from '../ui/Input'
 
@@ -72,5 +72,3 @@ export function Header({ onLogout }: HeaderProps) {
     </header>
   )
 }
-
-export { Header }

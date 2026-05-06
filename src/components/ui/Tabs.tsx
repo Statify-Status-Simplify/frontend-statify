@@ -86,11 +86,9 @@ export function TabsTrigger({ value, children, className }: TabsTriggerProps) {
       data-state={isActive ? 'active' : 'inactive'}
     >
       {children}
-    </div>
+    </button>
   )
 }
-
-export { Tabs, TabsList, TabsTrigger, TabsContent }
 
 interface TabsContentProps {
   value: string

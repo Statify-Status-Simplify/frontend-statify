@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -210,5 +210,3 @@ export function CreateMonitorDialog({
     </Dialog>
   )
 }
-
-export { CreateMonitorDialog }

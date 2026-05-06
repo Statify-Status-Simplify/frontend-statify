@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Badge } from '../ui/Badge'
 import { MoreVertical, Copy, Pause, Trash2 } from 'lucide-react'
 import { cn } from '../../lib/utils'
@@ -14,7 +14,6 @@ interface MonitorCardProps {
 }
 
 export function MonitorCard({
-  id,
   name,
   url,
   type,
@@ -118,5 +117,3 @@ export function MonitorCard({
     </div>
   )
 }
-
-export { MonitorCard }

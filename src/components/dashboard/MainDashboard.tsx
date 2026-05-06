@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 import { StatsCards } from './StatsCards'
@@ -6,7 +6,7 @@ import { MonitorCard } from './MonitorCard'
 import { MonitorList } from './MonitorList'
 import { CreateMonitorDialog } from './CreateMonitorDialog'
 import { Button } from '../ui/Button'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../ui/Tabs'
+import { Tabs, TabsList, TabsTrigger } from '../ui/Tabs'
 import { Plus } from 'lucide-react'
 
 interface MainDashboardProps {
@@ -245,5 +245,3 @@ export function MainDashboard({ onLogout }: MainDashboardProps) {
     </div>
   )
 }
-
-export { MainDashboard }

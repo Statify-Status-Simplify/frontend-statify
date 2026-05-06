@@ -1,6 +1,5 @@
-import React from 'react'
+import { Pause, Trash2, Edit } from 'lucide-react'
 import { Badge } from '../ui/Badge'
-import { MoreVertical, Pause, Trash2, Edit } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 interface Monitor {
@@ -105,5 +104,3 @@ export function MonitorList({ monitors }: MonitorListProps) {
     </div>
   )
 }
-
-export { MonitorList }

@@ -27,11 +27,9 @@ export function Dialog({ open: controlledOpen, onOpenChange, children }: DialogP
   return (
     <DialogContext.Provider value={{ open, setOpen }}>
       {children}
-    </div>
+    </DialogContext.Provider>
   )
 }
-
-export { Dialog, DialogOverlay, DialogContent }
 
 interface DialogTriggerProps {
   asChild?: boolean

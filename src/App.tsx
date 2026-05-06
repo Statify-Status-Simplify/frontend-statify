@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Menu, X, LogOut, Plus, AlertCircle, CheckCircle2, Clock } from 'lucide-react'
+import { Activity, Menu, X, LogOut, Plus, AlertCircle, CheckCircle2, Clock } from 'lucide-react'
 import { Button } from './components/ui/Button'
 import { Input } from './components/ui/Input'
 
@@ -54,12 +54,12 @@ const sampleMonitors: Monitor[] = [
 
 function StatCard({ label, value, icon: Icon }: { label: string; value: string | number; icon: React.ReactNode }) {
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-6">
-      <div className="flex items-start justify-between mb-3">
+    <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-8">
+      <div className="flex items-start justify-between mb-4">
         <p className="text-sm font-medium text-zinc-400">{label}</p>
         <div className="text-zinc-500">{Icon}</div>
       </div>
-      <p className="text-3xl font-semibold text-white">{value}</p>
+      <p className="text-4xl font-semibold text-white">{value}</p>
     </div>
   )
 }
@@ -75,29 +75,29 @@ function MonitorCard({ monitor }: { monitor: Monitor }) {
   const maxHeight = 48
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-6 hover:border-zinc-700 transition-colors">
+    <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-8 hover:border-zinc-700 transition-colors">
       {/* Header */}
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex items-start justify-between mb-6">
         <div className="flex-1">
-          <h3 className="text-base font-semibold text-white mb-1">{monitor.name}</h3>
+          <h3 className="text-lg font-semibold text-white mb-2">{monitor.name}</h3>
           <p className="text-sm text-zinc-500">{monitor.url}</p>
         </div>
-        <span className="inline-block bg-zinc-800 text-zinc-200 text-xs font-medium px-2.5 py-1 rounded">
+        <span className="inline-block bg-zinc-800 text-zinc-200 text-xs font-medium px-3 py-1.5 rounded">
           {monitor.type === 'http' ? 'HTTP' : 'IoT'}
         </span>
       </div>
 
       {/* Status and Metrics */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <div className={`w-2.5 h-2.5 rounded-full ${config.color}`}></div>
+          <div className={`w-3 h-3 rounded-full ${config.color}`}></div>
           <span className={`text-sm font-medium ${config.textColor}`}>{config.label}</span>
         </div>
         <p className="text-sm font-medium text-white">{monitor.uptime}% uptime</p>
       </div>
 
       {/* Sparkline */}
-      <div className="flex items-end gap-1 h-12">
+      <div className="flex items-end gap-1 h-16">
         {monitor.history.map((value, idx) => (
           <div
             key={idx}
@@ -118,84 +118,85 @@ function AuthView({ onLogin }: { onLogin: () => void }) {
   const [name, setName] = useState('')
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-indigo-600 rounded-lg mb-4">
-            <div className="text-white font-bold text-lg">S</div>
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-md rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl shadow-indigo-950/15 overflow-hidden">
+        <div className="p-8 sm:p-10">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <div className="flex items-center gap-2 text-indigo-500">
+              <Activity className="h-5 w-5" />
+              <span className="text-xl font-bold tracking-tight text-white">Statify</span>
+            </div>
+            <h1 className="text-2xl font-semibold text-white">Sign in to continue</h1>
+            <p className="mx-auto max-w-xs text-sm leading-6 text-zinc-400">
+              Monitor uptime, track performance, and get alerts from a unified enterprise dashboard.
+            </p>
           </div>
-          <h1 className="text-2xl font-bold text-white">Statify</h1>
-          <p className="text-zinc-400 text-sm mt-2">Digital Asset & IoT Monitoring</p>
-        </div>
 
-        {/* Card */}
-        <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-8 mb-6">
-          <h2 className="text-xl font-semibold text-white mb-6">{isSignup ? 'Create Account' : 'Welcome Back'}</h2>
-
-          <div className="space-y-4 mb-6">
+          <div className="mt-10 space-y-6">
             {isSignup && (
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-2">Full Name</label>
+                <label className="block mb-2 text-sm font-medium text-zinc-300">Full name</label>
                 <Input
                   type="text"
-                  placeholder="John Doe"
+                  placeholder="Alex Morgan"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-zinc-800 border-zinc-700 text-white placeholder-zinc-500"
+                  className="h-10 rounded-md border-zinc-800 bg-zinc-950/50"
                 />
               </div>
             )}
+
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">Email</label>
+              <label className="block mb-2 text-sm font-medium text-zinc-300">Email address</label>
               <Input
                 type="email"
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-zinc-800 border-zinc-700 text-white placeholder-zinc-500"
+                className="h-10 rounded-md border-zinc-800 bg-zinc-950/50"
               />
             </div>
+
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">Password</label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-sm font-medium text-zinc-300">Password</label>
+                <button type="button" className="text-sm text-indigo-400 hover:text-indigo-300 font-medium">
+                  Forgot password?
+                </button>
+              </div>
               <Input
                 type="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-zinc-800 border-zinc-700 text-white placeholder-zinc-500"
+                className="h-10 rounded-md border-zinc-800 bg-zinc-950/50"
               />
             </div>
+
+            <Button
+              onClick={onLogin}
+              variant="default"
+              className="w-full h-10 rounded-md bg-indigo-600 hover:bg-indigo-500 font-medium mt-4"
+            >
+              {isSignup ? 'Create account' : 'Sign in'}
+            </Button>
           </div>
 
-          <Button
-            onClick={onLogin}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 mb-4"
-          >
-            {isSignup ? 'Create Account' : 'Sign In'}
-          </Button>
-
-          <div className="text-center">
-            <p className="text-sm text-zinc-400">
-              {isSignup ? 'Already have an account?' : "Don't have an account?"}{' '}
-              <button
-                onClick={() => setIsSignup(!isSignup)}
-                className="text-indigo-400 hover:text-indigo-300 font-medium"
-              >
-                {isSignup ? 'Sign In' : 'Sign Up'}
-              </button>
-            </p>
+          <div className="mt-6 flex items-center justify-center gap-2 text-sm text-zinc-400">
+            <p>{isSignup ? 'Already have an account?' : "Don't have an account?"}</p>
+            <button
+              onClick={() => setIsSignup(!isSignup)}
+              className="text-indigo-400 hover:text-indigo-300 font-medium"
+            >
+              {isSignup ? 'Sign in' : 'Sign up'}
+            </button>
           </div>
-        </div>
 
-        {/* Dev Bypass */}
-        <div className="text-center">
-          <button
-            onClick={onLogin}
-            className="text-xs text-zinc-500 hover:text-zinc-400 underline"
-          >
-            [Dev: Bypass to Dashboard]
-          </button>
+          <div className="mt-6 border-t border-zinc-800 pt-4 text-center text-sm">
+            <button onClick={onLogin} className="text-indigo-400 hover:text-indigo-300 font-medium underline">
+              [Dev: Bypass to Dashboard]
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -218,9 +219,9 @@ function DashboardView({ onLogout }: { onLogout: () => void }) {
       <aside className={`fixed left-0 top-0 h-full bg-zinc-900 border-r border-zinc-800 transition-all duration-300 ${sidebarOpen ? 'w-64' : 'w-0'} overflow-hidden z-30`}>
         <div className="flex flex-col h-full p-6">
           {/* Logo */}
-          <div className="flex items-center gap-3 mb-8">
+          <div className="flex items-center gap-3 mb-10">
             <div className="inline-flex items-center justify-center w-10 h-10 bg-indigo-600 rounded-lg">
-              <div className="text-white font-bold">S</div>
+              <div className="text-white font-bold text-lg">S</div>
             </div>
             <h1 className="text-lg font-bold text-white">Statify</h1>
           </div>
@@ -245,7 +246,7 @@ function DashboardView({ onLogout }: { onLogout: () => void }) {
           </nav>
 
           {/* User Profile */}
-          <div className="pt-4 border-t border-zinc-800">
+          <div className="pt-6 border-t border-zinc-800">
             <button
               onClick={onLogout}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-400 hover:bg-red-950 transition-colors text-left text-sm font-medium"
@@ -282,9 +283,9 @@ function DashboardView({ onLogout }: { onLogout: () => void }) {
         </header>
 
         {/* Page Content */}
-        <main className="p-8">
+        <main className="p-10">
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {stats.map((stat) => (
               <StatCard key={stat.label} {...stat} />
             ))}
@@ -292,8 +293,8 @@ function DashboardView({ onLogout }: { onLogout: () => void }) {
 
           {/* Monitors Section */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6">Monitors</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+            <h3 className="text-xl font-semibold text-white mb-8">Monitors</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
               {sampleMonitors.map((monitor) => (
                 <MonitorCard key={monitor.id} monitor={monitor} />
               ))}
@@ -306,14 +307,14 @@ function DashboardView({ onLogout }: { onLogout: () => void }) {
 }
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
     <>
-      {!isAuthenticated ? (
-        <AuthView onLogin={() => setIsAuthenticated(true)} />
+      {!isLoggedIn ? (
+        <AuthView onLogin={() => setIsLoggedIn(true)} />
       ) : (
-        <DashboardView onLogout={() => setIsAuthenticated(false)} />
+        <DashboardView onLogout={() => setIsLoggedIn(false)} />
       )}
     </>
   )
