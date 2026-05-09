@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect, type ReactNode } from 'react'
 import {
-  Activity, LogIn, Menu, X, LogOut, Plus, AlertCircle, CheckCircle2,
+  Activity, Menu, X, LogOut, Plus, AlertCircle, CheckCircle2,
   Clock, MoreHorizontal, Search, Filter, Globe, Cpu, Copy, ChevronDown,
   Pause, FileText, Trash2, Edit3, Bell, Settings, LayoutDashboard,
-  Radio, ArrowRight, Eye, EyeOff, ShieldCheck, Wifi, Check, RefreshCw,
+  Radio, ArrowRight, Eye, EyeOff, ShieldCheck, Check, RefreshCw,
 } from 'lucide-react'
 
 /* ─────────────────────────────── types ─────────────────────────────── */
@@ -54,8 +54,6 @@ function Sparkline({ history, status, lastPing }: { history: number[]; status: '
     <div ref={containerRef} style={{ position: 'relative' }}>
       <div style={{ display: 'flex', alignItems: 'flex-end', gap: 3, height: 52 }}>
         {history.map((val, idx) => {
-          const t = new Date(now.getTime() - (history.length - idx) * 3600000)
-          const ping = val === 1 ? (lastPing ?? Math.round(20 + Math.random() * 80)) : 0
           const h = Math.max(val * 44, 3)
           const color = val === 0 ? '#ef4444' : val < 1 ? '#f59e0b' : barColor
           return (
