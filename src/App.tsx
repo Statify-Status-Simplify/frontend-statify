@@ -412,16 +412,14 @@ function AuthView({ onLogin }: { onLogin: () => void }) {
                 </div>
                 {mode !== 'forgot' && (
                   <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                      <label style={{ fontSize: 13, fontWeight: 500, color: '#a1a1aa' }}>Password</label>
-                      {mode === 'signin' && <button onClick={() => setMode('forgot')} style={{ fontSize: 13, color: '#6366f1', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 500, padding: 0 }}>Forgot password?</button>}
-                    </div>
-                    <div style={{ position: 'relative' }}>
+                    <label style={{ fontSize: 13, fontWeight: 500, color: '#a1a1aa', marginBottom: 8, display: 'block' }}>Password</label>
+                    <div style={{ position: 'relative', marginBottom: 8 }}>
                       <input type={showPass ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" style={{ width: '100%', background: '#09090b', border: `1px solid ${errors.password ? '#ef4444' : '#27272a'}`, borderRadius: 10, padding: '10px 42px 10px 14px', fontSize: 14, color: '#e4e4e7', outline: 'none', boxSizing: 'border-box', boxShadow: errors.password ? '0 0 0 3px rgba(239,68,68,0.1)' : 'none' }} />
                       <button onClick={() => setShowPass(!showPass)} style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#52525b', padding: 0 }}>
                         {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                       </button>
                     </div>
+                    {mode === 'signin' && <button onClick={() => setMode('forgot')} style={{ fontSize: 13, color: '#6366f1', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 500, padding: 0, marginBottom: 8, display: 'block', textAlign: 'right', width: '100%' }}>Forgot password?</button>}
                     {errors.password && <p style={{ fontSize: 12, color: '#f87171', margin: '6px 0 0', display: 'flex', alignItems: 'center', gap: 4 }}><AlertCircle size={12} />{errors.password}</p>}
                   </div>
                 )}
